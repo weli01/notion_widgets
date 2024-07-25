@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,22 +6,20 @@
     <title>Quote</title>
 
     <style>
-
         .widget {
-            padding: 5px 5px ;
-            color: #BA0A2F;
+            padding: 5px 5px;
+            color: #000000;
             text-align: center;
-                max-width: 95%;
+            max-width: 95%;
             margin: auto;
             font-variant-caps: petite-caps;
             font-size: 2em;
-
+            font-style: italic; /* Added to make the text italic */
         }
 
         div {
-             width: 95%;
-             min-height: 100px;
-
+            width: 95%;
+            min-height: 100px;
             background:
                 linear-gradient(to right, black 4px, transparent 4px) 0 0,
                 linear-gradient(to right, black 4px, transparent 4px) 0 100%,
@@ -32,51 +29,45 @@
                 linear-gradient(to bottom, black 4px, transparent 4px) 100% 0,
                 linear-gradient(to top, black 4px, transparent 4px) 0 100%,
                 linear-gradient(to top, black 4px, transparent 4px) 100% 100%;
-
             background-repeat: no-repeat;
             background-size: 20px 20px;
-}
-
-     
+        }
     </style>
 </head>
 <body>
 
     <div class="widget" id="widget"></div>
 
+    <script>
+        quotes = [
+            "Environmental dose evaluation following the installation of a SPECT/CT scanner in a major public hospital using Monte Carlo simulation",
+            "Environmental dose evaluation following the installation of a SPECT/CT scanner in a major public hospital using Monte Carlo simulation",
+            "Environmental dose evaluation following the installation of a SPECT/CT scanner in a major public hospital using Monte Carlo simulation",
+            "Environmental dose evaluation following the installation of a SPECT/CT scanner in a major public hospital using Monte Carlo simulation",
+            "Environmental dose evaluation following the installation of a SPECT/CT scanner in a major public hospital using Monte Carlo simulation",
+            "Environmental dose evaluation following the installation of a SPECT/CT scanner in a major public hospital using Monte Carlo simulation",
+            "Environmental dose evaluation following the installation of a SPECT/CT scanner in a major public hospital using Monte Carlo simulation",
+            "Environmental dose evaluation following the installation of a SPECT/CT scanner in a major public hospital using Monte Carlo simulation"
+        ];
 
-<script>
+        const INTERVAL = 86400000;
 
-quotes=[
-"Environmental dose evaluation following the installation of a SPECT/CT scanner in a major public hospital using Monte Carlo simulation",
-"Environmental dose evaluation following the installation of a SPECT/CT scanner in a major public hospital using Monte Carlo simulation",
-"Environmental dose evaluation following the installation of a SPECT/CT scanner in a major public hospital using Monte Carlo simulation",
-"Environmental dose evaluation following the installation of a SPECT/CT scanner in a major public hospital using Monte Carlo simulation",
-"Environmental dose evaluation following the installation of a SPECT/CT scanner in a major public hospital using Monte Carlo simulation",
-"Environmental dose evaluation following the installation of a SPECT/CT scanner in a major public hospital using Monte Carlo simulation",
-"Environmental dose evaluation following the installation of a SPECT/CT scanner in a major public hospital using Monte Carlo simulation",
-"Environmental dose evaluation following the installation of a SPECT/CT scanner in a major public hospital using Monte Carlo simulation",
-];
+        function dispalyQuote() {
+            document.getElementById('widget').innerHTML = quotes[0];
+            quotes.forEach((quote, i) => {
+                setTimeout(() => {
+                    document.getElementById('widget').innerHTML = quote;
+                }, i * INTERVAL);  
+            });
+        }
 
-const INTERVAL = 86400000;
+        function dispalyWidget() {
+            dispalyQuote();
+            setTimeout(dispalyWidget, quotes.length * INTERVAL);
+        }
 
-function dispalyQuote(){
-
-    document.getElementById('widget').innerHTML =quotes[0];
-    quotes.forEach((quote, i) => {
-        setTimeout(() => {
-            document.getElementById('widget').innerHTML =quote;
-        }, i * INTERVAL);  
-    });
-    }
-
-    function dispalyWidget() {
-        dispalyQuote();
-        setTimeout(dispalyWidget, quotes.length*INTERVAL);
-    }
-    dispalyWidget()
-
-</script>
+        dispalyWidget();
+    </script>
 
 </body>
 </html>
