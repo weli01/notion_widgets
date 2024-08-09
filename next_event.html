@@ -32,22 +32,36 @@
                     'Notion-Version': '2022-06-28'
                 },
                 body: JSON.stringify({
+                    "sorts": [
+                        {
+                            "property": "Date",  // Assuming you have a Date property
+                            "direction": "ascending"
+                        }
+                    ],
                     "filter": {
                         "property": "Date",
                         "date": {
                             "after": new Date().toISOString()
                         }
                     },
-                    "sorts": [
-                        {
-                            "property": "Date",
-                            "direction": "ascending"
-                        }
-                    ],
                     "page_size": 1
                 })
             });
 
-            if (response.ok) {
-                const data = await response.json();
-                const nextLecture = data.results[0];
+            const data = await response.json();
+            const nextLecture = data.results[0];
+
+            if (nextLecture) {
+                const title = nextLecture.properties.Title.title[0].text.content;
+                const date = new Date(nextLecture.properties.Date.date.start).toLocaleString();
+
+                document.getElementById('lecture-info').innerText = `Next Lecture: ${title} on ${date}`;
+            } else {
+                document.getElementById('lecture-info').innerText = 'No upcoming lectures.';
+            }
+        }
+
+        fetchNextLecture();
+    </script>
+</body>
+</html>
